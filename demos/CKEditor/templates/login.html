@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<form method="POST" action="{{ url_for('handle_signin') }}">
+    {{ sign_form.csrf_token }}
+    {{ sign_form.username.label }}
+    {{ sign_form.username }}
+    <br><br>
+    {{ sign_form.password.label }}
+    {{ sign_form.password }}
+    <br><br>
+    {{ sign_form.signin }}
+</form>
+<form method="POST" action="{{ url_for('handle_register') }}">
+    {{ register_form.csrf_token }}
+    {{ register_form.username.label }}
+    {{ register_form.username }}
+    <br><br>
+    {{ register_form.password.label }}
+    {{ register_form.password }}
+    <br><br>
+    {{ register_form.email.label }}
+    {{ register_form.email }}
+    <br><br>
+    {{ register_form.register }}
+
+
+</form>
+</body>
+</html>

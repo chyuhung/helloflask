@@ -13,72 +13,122 @@ from wtforms import StringField, PasswordField, BooleanField, IntegerField, \
 from wtforms.validators import DataRequired, Length, ValidationError, Email
 
 
-# 4.2.1 basic form example
-class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
-    remember = BooleanField('Remember me')
-    submit = SubmitField('Log in')
+# class TestForm(FlaskForm):
+#     username=StringField('用户名*',validators=[DataRequired()])
+#     password=PasswordField('密码*',validators=[DataRequired(),Length(8,128)])
+#     remember = BooleanField('记住我?')
+#     submit=SubmitField('登录')
 
 
-# custom validator
-class FortyTwoForm(FlaskForm):
-    answer = IntegerField('The Number')
-    submit = SubmitField()
 
-    def validate_answer(form, field):
-        if field.data != 42:
-            raise ValidationError('Must be 42.')
+# def is_10(form,field):
+#     if field.data!=10:
+#         raise ValidationError("is not 10!")
+# class MustBe07(FlaskForm):
+#     answer=IntegerField('The number',validators=[is_10])
+#     submit=SubmitField('Enter')
+#     def validate_answer(form,field):
+#         if field.data!=7:
+#             raise ValidationError("Must be 7")
 
-
-# upload form
-class UploadForm(FlaskForm):
-    photo = FileField('Upload Image', validators=[FileRequired(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])
-    submit = SubmitField()
-
-
-# multiple files upload form
-class MultiUploadForm(FlaskForm):
-    photo = MultipleFileField('Upload Image', validators=[DataRequired()])
-    submit = SubmitField()
+class UploadPhoto(FlaskForm):
+    photo=FileField("Upload Photo",validators=[FileRequired(),FileAllowed(['jpg','png','jpeg','gif'])])
+    submit=SubmitField("Upload")
 
 
-# multiple submit button
-class NewPostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired(), Length(1, 50)])
-    body = TextAreaField('Body', validators=[DataRequired()])
-    save = SubmitField('Save')
-    publish = SubmitField('Publish')
+from wtforms import  MultipleFileField
+class MultiUploadPhoto(FlaskForm):
+    photo=MultipleFileField("Upload Photo",validators=[DataRequired()])
+    submit=SubmitField("Start Upload")
 
 
-class SigninForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(1, 20)])
-    password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
-    submit1 = SubmitField('Sign in')
 
 
-class RegisterForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(1, 20)])
-    email = StringField('Email', validators=[DataRequired(), Email(), Length(1, 254)])
-    password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
-    submit2 = SubmitField('Register')
 
 
-class SigninForm2(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(1, 24)])
-    password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
-    submit = SubmitField()
 
 
-class RegisterForm2(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(1, 24)])
-    email = StringField('Email', validators=[DataRequired(), Email(), Length(1, 254)])
-    password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
-    submit = SubmitField()
 
 
-# CKEditor Form
-class RichTextForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired(), Length(1, 50)])
-    body = CKEditorField('Body', validators=[DataRequired()])
-    submit = SubmitField('Publish')
+
+
+
+
+
+
+
+
+
+
+
+
+#
+# # 4.2.1 basic form example
+# class LoginForm(FlaskForm):
+#     username = StringField('Username', validators=[DataRequired()])
+#     password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
+#     remember = BooleanField('Remember me')
+#     submit = SubmitField('Log in')
+#
+#
+# # custom validator
+# class FortyTwoForm(FlaskForm):
+#     answer = IntegerField('The Number')
+#     submit = SubmitField()
+#
+#     def validate_answer(form, field):
+#         if field.data != 42:
+#             raise ValidationError('Must be 42.')
+#
+#
+# # upload form
+# class UploadForm(FlaskForm):
+#     photo = FileField('Upload Image', validators=[FileRequired(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])
+#     submit = SubmitField()
+#
+#
+# # multiple files upload form
+# class MultiUploadForm(FlaskForm):
+#     photo = MultipleFileField('Upload Image', validators=[DataRequired()])
+#     submit = SubmitField()
+#
+#
+# # multiple submit button
+# class NewPostForm(FlaskForm):
+#     title = StringField('Title', validators=[DataRequired(), Length(1, 50)])
+#     body = TextAreaField('Body', validators=[DataRequired()])
+#     save = SubmitField('Save')
+#     publish = SubmitField('Publish')
+#
+#
+# class SigninForm(FlaskForm):
+#     username = StringField('Username', validators=[DataRequired(), Length(1, 20)])
+#     password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
+#     submit1 = SubmitField('Sign in')
+#
+#
+# class RegisterForm(FlaskForm):
+#     username = StringField('Username', validators=[DataRequired(), Length(1, 20)])
+#     email = StringField('Email', validators=[DataRequired(), Email(), Length(1, 254)])
+#     password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
+#     submit2 = SubmitField('Register')
+#
+#
+# class SigninForm2(FlaskForm):
+#     username = StringField('Username', validators=[DataRequired(), Length(1, 24)])
+#     password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
+#     submit = SubmitField()
+#
+#
+# class RegisterForm2(FlaskForm):
+#     username = StringField('Username', validators=[DataRequired(), Length(1, 24)])
+#     email = StringField('Email', validators=[DataRequired(), Email(), Length(1, 254)])
+#     password = PasswordField('Password', validators=[DataRequired(), Length(8, 128)])
+#     submit = SubmitField()
+#
+#
+# # CKEditor Form
+# class RichTextForm(FlaskForm):
+#     title = StringField('Title', validators=[DataRequired(), Length(1, 50)])
+#     body = CKEditorField('Body', validators=[DataRequired()])
+#     submit = SubmitField('Publish')

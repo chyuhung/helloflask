@@ -1,0 +1,6 @@
+<h1>Flash Message</h1>
+{% for message in get_flashed_messages() %}
+    <div>
+        {{ message }}
+    </div>
+{% endfor %}

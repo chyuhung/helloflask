@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rich Text Form</title>
+</head>
+<body>
+<h1>Rich Text Form</h1>
+<form method="post">
+    {{ form.csrf_token }}
+    {{ form.title.label }}
+    {{ form.title}}
+    <br><br>
+    {{ form.body }}
+    <br><br>
+    {{ form.save }}
+    {{ form.publish }}
+</form>
+</body>
+{{ ckeditor.load() }}
+{{ ckeditor.config(name='body') }}
+</html>

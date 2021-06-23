@@ -1,0 +1,13 @@
+{% if session.photonames %}
+    {% for photoname in session.photonames %}
+    <a href="{{ url_for("getfile",filename=photoname) }}" target="_blank">
+        <img src="{{ url_for("getfile",filename=photoname) }}">
+    </a>
+    {% endfor %}
+{% endif %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert">
+    {{ message }}
+</div>
+{% endfor %}

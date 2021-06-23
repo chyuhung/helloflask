@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+{% from 'macros.html' import form_field %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css' ) }}">
+    <title>MustBe07</title>
+    <h1>MustBe07</h1>
+
+</head>
+<body>
+    <form method="post">
+        {{ form.answer.label }}<br>
+        {{ form.answer}}<br>
+        {% if form.answer.errors %}
+            {% for message in form.answer.errors %}
+                <small class="error">{{ message }}</small><br>
+            {% endfor %}
+        {% endif %}
+        <br>{{ form.submit}}
+    </form>
+
+</body>
+</html>
