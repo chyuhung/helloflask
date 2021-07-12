@@ -1,4 +1,4 @@
-// Flot Charts sample data for SB Admin template
+// Flot Charts sample data for SB Admin templates
 
 // Flot Line Chart with Tooltips
 $(document).ready(function() {

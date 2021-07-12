@@ -22,7 +22,9 @@ def make_shell_context():
     return dict(db=db,
                 # Author=Author,Article=Article,Writer=Writer,Book=Book,Singer=Singer,Song=Song,
                 #City=City,Citizen=Citizen,Country=Country,Capital=Capital
-                Student=Student,Teacher=Teacher
+                #Student=Student,Teacher=Teacher
+                #Post=Post,Comment=Comment
+                Draft=Draft
            )
 
 # #初始化数据库
@@ -38,19 +40,47 @@ def initdb(drop):
     db.create_all()
     click.echo("Initialized Database.")
 
-association_table=db.Table("association",db.Column("student_id",db.Integer,db.ForeignKey("student.id")),db.Column("teacher_id",db.Integer,db.ForeignKey("teacher.id")))
-
-class Student(db.Model):
+class Draft(db.Model):
     id=db.Column(db.Integer,primary_key=True)
-    name=db.Column(db.String(70),unique=True)
-    grade=db.Column(db.String(20))
-    teachers=db.relationship("Teacher",secondary=association_table,back_populates="students")
+    body=db.Column(db.Text)
+    edit_time=db.Column(db.Integer,default=0)
 
-class Teacher(db.Model):
-    id=db.Column(db.Integer,primary_key=True)
-    name=db.Column(db.String(70),unique=True)
-    office=db.Column(db.String(20))
-    students=db.relationship("Student",secondary=association_table,back_populates="teachers")
+@db.event.listens_for(Draft.body,"set",named=True)
+def increment_edit_time(**kwargs):
+    if kwargs["target"].edit_time is not None:
+        kwargs["target"].edit_time +=1
+
+# @db.event.listens_for(Draft.body,"set")
+# def increment_edit_time(target,value,oldvalue,initiator):
+#     if target.edit_time is  not None:
+#         target.edit_time+=1
+
+# class Post(db.Model):
+#     id=db.Column(db.Integer,primary_key=True)
+#     title=db.Column(db.String(125))
+#     body=db.Column(db.Text)
+#     comments=db.relationship("Comment",cascade="all,delete-orphan")
+#
+# class Comment(db.Model):
+#     id=db.Column(db.Integer,primary_key=True)
+#     body=db.Column(db.Text)
+#     post_id=db.Column(db.Integer,db.ForeignKey("post.id"))
+#     post=db.relationship("Post",back_populates="comments")
+
+# association_table=db.Table("association",db.Column("student_id",db.Integer,db.ForeignKey("student.id")),db.Column("teacher_id",db.Integer,db.ForeignKey("teacher.id")))
+#
+# class Student(db.Model):
+#     id=db.Column(db.Integer,primary_key=True)
+#     name=db.Column(db.String(70),unique=True)
+#     grade=db.Column(db.String(20))
+#     teachers=db.relationship("Teacher",secondary=association_table,back_populates="students")
+#
+# class Teacher(db.Model):
+#     id=db.Column(db.Integer,primary_key=True)
+#     name=db.Column(db.String(70),unique=True)
+#     office=db.Column(db.String(20))
+#     timestamp=db.Column(db.TIMESTAMP)
+#     students=db.relationship("Student",secondary=association_table,back_populates="teachers")
 
 
 #
