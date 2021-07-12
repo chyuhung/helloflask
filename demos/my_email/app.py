@@ -11,9 +11,9 @@ app.secret_key = os.getenv('SECRET_KEY', '123456789')
 app.config.update(
     MAIL_SERVER='smtp.163.com',
     MAIL_PORT=25,
-    MAIL_USERNAME='15023765237@163.com',
-    MAIL_PASSWORD='OQGAGTEOYDNEJXRX',
-    MAIL_DEFAULT_SENDER='15023765237@163.com>'
+    MAIL_USERNAME='xx@163.com',
+    MAIL_PASSWORD='xx',
+    MAIL_DEFAULT_SENDER='xx@163.com>'
 )
 
 mail = Mail(app)
